@@ -6,8 +6,11 @@ $invalid_int = false
 $done = "then you're all set to keep on gitting ^__^"
 $good = "all good?"
 $hmm = "let's try ..."
-$work_to_do = "This will eventually cover multiple generalized help topics"
+$work_to_do = "Yay good choice! (I don't have this set up yet.)"
 
+def array_iterate(array)
+  array.each { |x| puts x }
+end
 
 def answer_is_yes
   $yes.include?($current_answer)
@@ -40,17 +43,19 @@ def non_issue
   $question_type = :numeric
   git_topics = [
     "1. Git options",
-    "2. Git definitions"
+    "2. Git definitions",
+    "3. Git flow",
+    "4. GitX"
     ]
 
   puts "\n\nokie doke"
   puts "Just looking for help?"
   puts "Enter which topic you need help with.\n\n"
 
-  git_topics.each { |x| puts x }
+  array_iterate(git_topics)
   puts
   $current_answer = response.to_i
-  while $current_answer < 1 || $current_answer > 2
+  while $current_answer < 1 || $current_answer > 4
     $invalid_int = true
     user_response($current_answer)
   end
@@ -66,7 +71,7 @@ def issue
     "2. I accidentally commited something",
     "3. My Git history is ugly"
   ]
-  issue_array.each { |x| puts x }
+  array_iterate(issue_array)
   puts
   $current_answer = response.to_i
   while $current_answer < 1 || $current_answer > 3
@@ -103,13 +108,25 @@ def issue
   end
 
   def commit
-    puts $work_to_do
+    puts "has anyone else seen it?"
+    $question_type = :yes_no
+    user_response(response)
+    if answer_is_yes
+      puts "that sucks."
+    else
+      puts "how long ago was it commited?"
+      how_long = [
+        "1: Probably forever?",
+        "2: Last commit"
+      ]
+      array_iterate(how_long)
+      user_response(response)
+    end
   end
 
   def history
     puts $work_to_do
   end
-
 
   def issue_type(answer)
     if answer == 1
