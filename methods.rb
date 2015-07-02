@@ -3,6 +3,15 @@ $yes = ["yes", "y", "Yes", "YES"]
 $no = ["no", "n", "No", "NO"]
 $question_type = :yes_no
 $invalid_int = false
+$done = "then you're all set to keep on gitting ^__^"
+$good = "all good?"
+$hmm = "let's try ..."
+$work_to_do = "This will eventually cover multiple generalized help topics"
+
+
+def answer_is_yes
+  $yes.include?($current_answer)
+end
 
 def response
   input = gets.chomp
@@ -45,7 +54,7 @@ def non_issue
     $invalid_int = true
     user_response($current_answer)
   end
-  puts "This will eventually cover multiple generalized help topics"
+  puts $work_to_do
 end
 
 def issue
@@ -53,17 +62,62 @@ def issue
 
   puts "\n\nWhat kind of issue?"
   issue_array = [
-    "0. An uncommited mess",
-    "1. I accidentally commited something",
-    "2. My Git history is ugly"
+    "1. An uncommited mess",
+    "2. I accidentally commited something",
+    "3. My Git history is ugly"
   ]
   issue_array.each { |x| puts x }
   puts
   $current_answer = response.to_i
-  while $current_answer < 0 || $current_answer > 3
+  while $current_answer < 1 || $current_answer > 3
     $invalid_int = true
     user_response($current_answer)
   end
 
-  def issue_type
+  def mess
+    puts "Uncommited Mess:\n\n"
+    puts "Do you care enough about your mess to keep it?"
+    $question_type = :yes_no
+    user_response(response)
+    if answer_is_yes
+      puts "split off a logical chunk of your mess, stage it, and commit it with a good message."
+      sleep(5)
+      puts $good
+      user_response(response)
+      if answer_is_yes
+        puts $done
+      else
+        puts $hmm
+      end
+    else
+      puts "$git reset --hard"
+      sleep(5)
+      puts $good
+      user_response(response)
+      if answer_is_yes
+        puts $done
+      else
+        puts $hmm
+      end
+    end
+  end
+
+  def commit
+    puts $work_to_do
+  end
+
+  def history
+    puts $work_to_do
+  end
+
+
+  def issue_type(answer)
+    if answer == 1
+      mess
+    elsif answer == 2
+      commit
+    else
+      history
+    end
+  end
 end

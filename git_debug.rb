@@ -6,7 +6,7 @@ def git_debug
   puts "Welcome to git debugger!\n\n"
   puts "Are you here because you have an issue?"
   user_response(response)
-  if $yes.include?($current_answer)
+  if answer_is_yes
     issue
     issue_type($current_answer)
   else
