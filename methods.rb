@@ -34,10 +34,14 @@ def response
 end
 
 def valid_integer(start, finish)
-  $current_answer = response.to_i
-  while $current_answer < start || $current_answer > finish
-    $invalid_int = true
-    user_response($current_answer)
+  answer = response
+  if answer != "help"
+    $current_answer = answer.to_i
+    while $current_answer < start || $current_answer > finish 
+      $invalid_int = true
+      user_response($current_answer)
+    end
+  else user_response(answer)
   end
 end
 
@@ -114,7 +118,7 @@ def commit
   if answer_is_yes
     puts "that sucks."
   else
-    puts "how long ago was it commited?"
+    puts "how long ago was it committed?"
     how_long = [
       "1: Probably forever?",
       "2: Last commit"

@@ -4,6 +4,7 @@ $terms = [
 	"cherry-pick",
 	"commit",
 	"merge",
+	'patch',
 	"plumbing",
 	"pull",
 	"rebase",
@@ -48,3 +49,11 @@ def rev
 	puts "'Generally is referring to the 40-character SHA1 hash for a commit."
 end
 
+def patch
+	puts "this is the difference that you want to apply to the files in your working branch."
+	puts "'<patch>' refers to the files to read the patch from.\n\n"
+	puts "Other options similar to patch:"
+	puts "--stat"
+	puts "--summary"
+	puts "--check"
+end

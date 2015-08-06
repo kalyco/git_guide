@@ -8,6 +8,7 @@ end
 
 def git_tutorial(answer)
   if answer == "exit"
+  	puts "Exiting Git Interactive"
     send($method_value)
   else
     puts "this will take a bit of metaprogramming"
